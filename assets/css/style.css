@@ -1,4 +1,44 @@
-* {
+:root {
+    --blue: dodgerblue;
+    --white: antiquewhite;
+  }
 
+* {
+    font-family: 'Courier New', Courier, monospace;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#header-bar {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.container-card {
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-side {
+    flex-grow: 0.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-side {
+    flex-grow: 1.5;
+    display: flex;
+    flex-direction: column;
+}
