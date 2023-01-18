@@ -23,7 +23,7 @@ body {
 .container-card {
     border-style: solid;
     border-color: black;
-    border-width: 3px;
+    border-width: 1px;
 }
 
 .main-container {
@@ -41,4 +41,30 @@ body {
     flex-grow: 1.5;
     display: flex;
     flex-direction: column;
+}
+
+#search-card{
+    display: flex;
+    flex-direction: column;
+}
+
+#history-card{
+    display: flex;
+    flex-direction: column;
+}
+
+#weather-card{
+    display: flex;
+    flex-direction: column;
+}
+
+#five-day-card{
+    display: flex;
+    flex-direction: column;
+}
+
+#five-day-ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
 }
