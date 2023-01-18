@@ -10,21 +10,21 @@
 
 var testBtn = document.getElementById("btn");
 
-testBtn.addEventListener("click", console.log("hello"));
+testBtn.addEventListener("click", getLatLong);
 
-// function consoleFunc(){
-//     console.log("test");
-// };
+function consoleFunc(){
+    console.log("test");
+};
 
-// function getLatLong(){
-//     console.log("button works");
-// //     navigator.geolocation.getCurrentPosition((position) => {
-// //     const lat = position.coords.latitude;
-// //     const long = position.coords.longitude;
-// //     console.log(lat);
-// //     console.log(long);
-// // });
-// }
+function getLatLong(){
+    console.log("button works");
+    navigator.geolocation.getCurrentPosition((position) => {
+    const lat = position.coords.latitude;
+    const long = position.coords.longitude;
+    console.log(lat);
+    console.log(long);
+});
+}
 
 // function getCurrentWeather(){
 //     fetch(queryURL)
