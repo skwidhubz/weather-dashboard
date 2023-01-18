@@ -18,20 +18,21 @@ function getLatLong(){
     const long = position.coords.longitude;
     console.log(lat);
     console.log(long);
-    return lat, long
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+long+"&appid=b5a40f59d7b1cf68e5036b045244a798"
+    return queryURL
 });
 }
 
 getLatLong();
 
 
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+long+"&appid=b5a40f59d7b1cf68e5036b045244a798"
+
 
 var weatherBtn = $("#weather-btn");
 
 weatherBtn.click(getCurrentWeather);
 
-function getCurrentWeather(lat, long){
+function getCurrentWeather(queryURL){
     fetch(queryURL)
     .then((response) => response.json())
     .then((data) => console.log(data));
