@@ -6,7 +6,7 @@ var textBox = document.getElementById("#city-name"); //city name text box
 const fiveDayContainer = $("#five-day-ul"); //UL for five day
 var historyEl = $("#search-history-ul") // search history UL
 const clearHistoryBtn = $("#clear-search-btn"); // clear history button
-
+var placeNameGlobal = "";
 
 // Geocoding conversion API
 
@@ -33,15 +33,17 @@ function geoCodeFunc(){
         const placeName = document.createElement("h3");
         weatherContainer.append(placeName);
         placeName.innerText = data[0].name + " (" + dayjs().format('DD/MM/YYYY') + ") ";
-        // historyEl.append(data[0].name + "<br>");
+        // create button with name and latLong data
         let buttonListEl = document.createElement("button");
         buttonListEl.setAttribute("class", "list-button");
         buttonListEl.dataset.city = data[0].name;
         buttonListEl.dataset.long = lonVar;
         buttonListEl.dataset.lat = latVar; 
-        
+        // add button to history UL
         historyEl.append(buttonListEl);
         buttonListEl.innerText = data[0].name;
+        placeNameGlobal = data[0].name;
+        searchHistory()
     });
 }
 
@@ -63,7 +65,6 @@ function oneCallWeather(){
             console.log("oneCall Func");
             console.log(data);
             
-
             // current weather container populate list
             const currentIcon = document.createElement("img")
             const dataDescription = document.createElement("li");
@@ -193,9 +194,6 @@ function oneCallWeather(){
 
     });}
 
-
-
-
 var submitBtn = $("#submit-btn");
 
 // submitBtn.click(getCurrentWeather);
@@ -211,63 +209,6 @@ function clearDataFunc(){
         fiveDayContainer.empty();
 }
 
-// submitBtn.click(searchHistory);
-// submitBtn.click(populateHistory);
-// submitBtn.click(oneCallWeather);
-// submitBtn.click(getFiveDayForecast);
-
-function printSearchName(){
-
-}
-
-// function getCurrentWeather(){
-//     var cityName = $("#city-name").val();
-//     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey
-//     fetch(queryURL)
-//     .then((response) => response.json())
-//     .then((data) => {
-//         console.log(data);
-//         console.log(data.weather[0].description);
-//         console.log((data.main.temp).toFixed(2) + '°C');
-//         // const placeName = document.createElement("h3");
-//         // const dataDescription = document.createElement("li");
-//         // const mainTemp = document.createElement("li");
-//         // const mainFeelsLike = document.createElement("li");
-//         // const windSpeed = document.createElement("li");
-//         // const humidity = document.createElement("li");
-//         // weatherContainer.appendChild(placeName);
-//         // weatherContainer.appendChild(dataDescription);
-//         // weatherContainer.appendChild(mainTemp);
-//         // weatherContainer.appendChild(mainFeelsLike);
-//         // weatherContainer.appendChild(windSpeed);
-//         // weatherContainer.appendChild(humidity);
-//         // placeName.innerText = data.weather.main.name;
-//         // dataDescription.innerText = data.weather[0].description;
-//         // mainTemp.innerText = data.main.temp;
-//         // mainFeelsLike.innerText = data.main.feels_like;
-//         // windSpeed.innerText = main.wind.speed;
-//         // humidity.innerText = data.main.humidity;
-
-//         console.log(latVar);
-//     });
-    
-// };
-
-
-//five day forecast API
-
-// function getFiveDayForecast(){
-
-//     var qURLFiveDay = "https://api.openweathermap.org/data/2.5/forecast/daily?lat="+latVar+"&lon="+lonVar+"&cnt=5&appid=18848cbedd7ada99a16a0c493d42f700"
-
-//     fetch(qURLFiveDay)
-//     .then((response) => response.json())
-//     .then((data) => console.log(data));
-
-// // get LAT LONG from first API call.
-// // cnt = count of days. 5.
-// }
-
 
 function printGlobalVar(){
     if (latVar == null && lonVar == null) {
@@ -278,19 +219,18 @@ function printGlobalVar(){
 }
 
 
-
 // SEARCH HISTORY FUNCTION (HISTORY PAGE)((LOCAL STORAGE))
 
 // page loaded populate function
 
-// var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty array to store search query
+var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty array to store search query
 
 
-// function searchHistory() {  
-//   historyList.innerHTML = "";
-//   storageArray.push(textBox.value);
-//   localStorage.setItem("value", JSON.stringify(storageArray));
-// }
+function searchHistory() {  
+  historyEl.innerHTML = "";
+  storageArray.push(placeNameGlobal);
+  localStorage.setItem("value", JSON.stringify(storageArray));
+}
 
 // // function to iterate and populate
 // const historyList = $("search-history-ul")
@@ -306,24 +246,25 @@ function printGlobalVar(){
 //   // event.preventDefault();
 // };
 
-// function clearLocalStorage() {
-//   localStorage.clear();
-//   storageArray = [];
-//   while (historyList.hasChildNodes()) {
-//     historyList.removeChild(historyList.firstChild);
-//   }
-// }
+function clearLocalStorage() {
+  localStorage.clear();
+  storageArray = [];
+  while (historyEl.hasChildNodes()) {
+    historyEl.removeChild(historyEl.firstChild);
+  }
+}
 
 
-clearHistoryBtn.click(clearHistoryContainer);
+clearHistoryBtn.click(clearHistoryAndStorage);
 
-function clearHistoryContainer(){
+function clearHistoryAndStorage(){
     console.log("clear history button");
     historyEl.empty();
-
+    localStorage.clear();
 }
-// clearHistoryBtn.click(clearLocalStorage);
-// end of search history functions
+
+
+
 
 
 
