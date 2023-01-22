@@ -4,12 +4,20 @@
   }
 
 * {
-    font-family: 'Courier New', Courier, monospace;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
+}
+
+button {
+    margin: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px;
 }
 
 #header-bar {
@@ -48,6 +56,17 @@ body {
     flex-direction: column;
 }
 
+#search-box{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#city-name{
+    padding: 5px;
+    font-size: larger;
+}
+
 #history-card{
     display: flex;
     flex-direction: column;
@@ -68,3 +87,5 @@ body {
     flex-direction: row;
     list-style: none;
 }
+
+

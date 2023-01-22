@@ -14,39 +14,68 @@
             <h1>Weather Dashboard</h1>
         </section>
 
+<div>
+    <br>
+</div>
+
     <div class="main-container">
-        <div class="left-side">   
+
+
+        <div class="left-side"> 
+            
+        <!-- SEARCH CONTAINER    -->
             <section class="container-card" id="search-card">
+                <h3>Search for a City:</h3>
+                <div id="search-box">
                 <input class="input" id="city-name" type="text" placeholder="Melbourne"></input>
                 <button id="submit-btn">Submit</button>
+                </div>
             </section>
 
+        <!-- SEARCH HISTORY -->
             <section class="container-card" id="history-card">
-                search history
+                <h3>Search History</h3>
                 <ul id="search-history-ul">
 
                 </ul>
+
+                <button id="clear-search-btn">clear history</button>
             </section>
         </div> 
 
+        <!-- CURRENT WEATHER  -->
         <div class="right-side">    
             <section class="container-card" id="weather-card">
-                current Weather
+                
                 <ul id="current-weather-ul">
                     
                 </ul>
             </section>
-
+        
+        <!-- FIVE DAY FORECAST -->
             <section class="container-card" id="five-day-card">
-                5 day weather forecast
+                <h4>5-Day Forecast:</h4> 
                 <ul id="five-day-ul">
-                    <li> day 1 </li>
-                    <li> day 2 </li>
-                    <li> day 3 </li>
+
+
                 </ul>
             </section>
         </div>
     </div>
+
+  
+<!-- TEST CONTAINER FOR DEBUG     -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+    <h6>debug log container:</h6>
+    <h4 id="test-container"></h4>
+</div>
+
 
 
 <!-- jQuery Link -->
