@@ -1,6 +1,6 @@
 :root {
     --blue: dodgerblue;
-    --white: antiquewhite;
+    --white: rgb(255, 255, 255);
     --darkblue: rgb(2, 43, 85); 
   }
 
@@ -11,11 +11,14 @@
 body {
     display: flex;
     flex-direction: column;
+    background-color: var(--white);
 }
 
 button {
     margin: 10px;
 }
+
+
 
 h1, h2, h3, h4, h5, h6 {
     margin: 10px;
@@ -33,10 +36,11 @@ li {
     color: var(--white);
 }
 
+ /* CONTAINER CARD BORDER FOR LAYOUT DEBUG */
 .container-card {
-    border-style: solid;
+    /* border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 1px; */
 }
 
 .main-container {
@@ -75,6 +79,18 @@ li {
 #history-card{
     display: flex;
     flex-direction: column;
+}
+
+#search-history-ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.list-button {
+    background-color: var(--white);
+    color: blue;
+    margin: 5px;
 }
 
 #weather-card{

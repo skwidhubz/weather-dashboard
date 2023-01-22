@@ -32,8 +32,16 @@ function geoCodeFunc(){
         oneCallWeather(latVar, lonVar);
         const placeName = document.createElement("h3");
         weatherContainer.append(placeName);
-        placeName.innerText = data[0].name + " (" + dayjs('2019-01-25').format('DD/MM/YYYY') + ") ";
-        historyEl.append(data[0].name + "<br>");
+        placeName.innerText = data[0].name + " (" + dayjs().format('DD/MM/YYYY') + ") ";
+        // historyEl.append(data[0].name + "<br>");
+        let buttonListEl = document.createElement("button");
+        buttonListEl.setAttribute("class", "list-button");
+        buttonListEl.dataset.city = data[0].name;
+        buttonListEl.dataset.long = lonVar;
+        buttonListEl.dataset.lat = latVar; 
+        
+        historyEl.append(buttonListEl);
+        buttonListEl.innerText = data[0].name;
     });
 }
 
@@ -54,7 +62,7 @@ function oneCallWeather(){
         .then((data) => {
             console.log("oneCall Func");
             console.log(data);
-            console.log(data.current.weather[0].icon);
+            
 
             // current weather container populate list
             const currentIcon = document.createElement("img")
@@ -79,7 +87,9 @@ function oneCallWeather(){
             humidity.innerText = "Humidity: " + data.current.humidity + " g.m-3";
 
             // five day forecast list cards
-            let currentDate = dayjs('2019-01-25').format('DD/MM/YYYY'); // current date
+            // let dateBase = dayjs().format('DD/MM/YYYY');
+            let currentDate = dayjs.unix(data.current.dt).format('DD/MM/YYYY');
+            
 
             const fiveCardEl1 = $('<div></div>').addClass("five-cards");
             fiveDayContainer.append(fiveCardEl1);
