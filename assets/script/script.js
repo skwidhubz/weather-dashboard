@@ -23,8 +23,10 @@ function geoCodeFunc(){
         console.log(data[0].lon);
         const cityLat = data[0].lat;
         const cityLon = data[0].lon;
-        oneCallWeather();
-        return latVar = cityLat, lonVar = cityLon;
+        // oneCallWeather();
+        latVar = cityLat;
+        lonVar = cityLon;
+        oneCallWeather(latVar, lonVar);
     });
 }
 
@@ -45,6 +47,26 @@ function oneCallWeather(){
         .then((data) => {
             console.log("oneCall Func");
             console.log(data);
+
+        const placeName = document.createElement("h3");
+        const dataDescription = document.createElement("li");
+        const mainTemp = document.createElement("li");
+        const mainFeelsLike = document.createElement("li");
+        const windSpeed = document.createElement("li");
+        const humidity = document.createElement("li");
+        weatherContainer.appendChild(placeName);
+        weatherContainer.appendChild(dataDescription);
+        weatherContainer.appendChild(mainTemp);
+        weatherContainer.appendChild(mainFeelsLike);
+        weatherContainer.appendChild(windSpeed);
+        weatherContainer.appendChild(humidity);
+        placeName.innerText = data.weather.main.name;
+        dataDescription.innerText = data.weather[0].description;
+        mainTemp.innerText = data.main.temp;
+        mainFeelsLike.innerText = data.main.feels_like;
+        windSpeed.innerText = main.wind.speed;
+        humidity.innerText = data.main.humidity;
+
     });}
 
 
@@ -63,38 +85,38 @@ function printSearchName(){
 
 }
 
-function getCurrentWeather(){
-    var cityName = $("#city-name").val();
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey
-    fetch(queryURL)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        console.log(data.weather[0].description);
-        console.log((data.main.temp).toFixed(2) + '°C');
-        // const placeName = document.createElement("h3");
-        // const dataDescription = document.createElement("li");
-        // const mainTemp = document.createElement("li");
-        // const mainFeelsLike = document.createElement("li");
-        // const windSpeed = document.createElement("li");
-        // const humidity = document.createElement("li");
-        // weatherContainer.appendChild(placeName);
-        // weatherContainer.appendChild(dataDescription);
-        // weatherContainer.appendChild(mainTemp);
-        // weatherContainer.appendChild(mainFeelsLike);
-        // weatherContainer.appendChild(windSpeed);
-        // weatherContainer.appendChild(humidity);
-        // placeName.innerText = data.weather.main.name;
-        // dataDescription.innerText = data.weather[0].description;
-        // mainTemp.innerText = data.main.temp;
-        // mainFeelsLike.innerText = data.main.feels_like;
-        // windSpeed.innerText = main.wind.speed;
-        // humidity.innerText = data.main.humidity;
+// function getCurrentWeather(){
+//     var cityName = $("#city-name").val();
+//     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+apiKey
+//     fetch(queryURL)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         console.log(data);
+//         console.log(data.weather[0].description);
+//         console.log((data.main.temp).toFixed(2) + '°C');
+//         // const placeName = document.createElement("h3");
+//         // const dataDescription = document.createElement("li");
+//         // const mainTemp = document.createElement("li");
+//         // const mainFeelsLike = document.createElement("li");
+//         // const windSpeed = document.createElement("li");
+//         // const humidity = document.createElement("li");
+//         // weatherContainer.appendChild(placeName);
+//         // weatherContainer.appendChild(dataDescription);
+//         // weatherContainer.appendChild(mainTemp);
+//         // weatherContainer.appendChild(mainFeelsLike);
+//         // weatherContainer.appendChild(windSpeed);
+//         // weatherContainer.appendChild(humidity);
+//         // placeName.innerText = data.weather.main.name;
+//         // dataDescription.innerText = data.weather[0].description;
+//         // mainTemp.innerText = data.main.temp;
+//         // mainFeelsLike.innerText = data.main.feels_like;
+//         // windSpeed.innerText = main.wind.speed;
+//         // humidity.innerText = data.main.humidity;
 
-        console.log(latVar);
-    });
+//         console.log(latVar);
+//     });
     
-};
+// };
 
 
 //five day forecast API
