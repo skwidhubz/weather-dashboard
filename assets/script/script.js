@@ -29,20 +29,11 @@ function geoCodeFunc(){
         // oneCallWeather();
         latVar = cityLat;
         lonVar = cityLon;
+        placeNameGlobal = data[0].name;
         oneCallWeather(latVar, lonVar);
         const placeName = document.createElement("h3");
         weatherContainer.append(placeName);
-        placeName.innerText = data[0].name + " (" + dayjs().format('DD/MM/YYYY') + ") ";
-        // create button with name and latLong data
-        let buttonListEl = document.createElement("button");
-        buttonListEl.setAttribute("class", "list-button");
-        buttonListEl.dataset.city = data[0].name;
-        buttonListEl.dataset.long = lonVar;
-        buttonListEl.dataset.lat = latVar; 
-        // add button to history UL
-        historyEl.append(buttonListEl);
-        buttonListEl.innerText = data[0].name;
-        placeNameGlobal = data[0].name;
+        placeName.innerText = data[0].name + " (" + dayjs().format('DD/MM/YYYY') + ") ";      
         searchHistory()
     });
 }
@@ -218,13 +209,11 @@ function printGlobalVar(){
     }
 }
 
-
 // SEARCH HISTORY FUNCTION (HISTORY PAGE)((LOCAL STORAGE))
 
 // page loaded populate function
 
 var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty array to store search query
-
 
 function searchHistory() {  
   historyEl.innerHTML = "";
@@ -232,19 +221,29 @@ function searchHistory() {
   localStorage.setItem("value", JSON.stringify(storageArray));
 }
 
-// // function to iterate and populate
-// const historyList = $("search-history-ul")
+// function to iterate and populate
 
-// function populateHistory(){
-//   historyList.innerHTML = "";
-//   for (let i = 0; i < storageArray.length; i++) {
-//     const element = storageArray[i];
-//     const liEl = document.createElement("li");
-//     liEl.textContent = element;
-//     historyList.appendChild(liEl);
-//   }
-//   // event.preventDefault();
-// };
+function populateHistory(){
+  historyList.innerHTML = "";
+  for (let i = 0; i < storageArray.length; i++) {
+    const element = storageArray[i];
+    // const liEl = document.createElement("li");
+    // liEl.textContent = element;
+    // historyList.appendChild(liEl);
+
+    // create button with name and latLong data
+    let buttonListEl = document.createElement("button");
+    buttonListEl.setAttribute("class", "list-button");
+    buttonListEl.textContent = placeNameGlobal;
+    buttonListEl.dataset.city = data[0].name;
+    buttonListEl.dataset.long = lonVar;
+    buttonListEl.dataset.lat = latVar; 
+    // add button to history UL
+    historyEl.append(buttonListEl); 
+
+  }
+  // event.preventDefault();
+};
 
 function clearLocalStorage() {
   localStorage.clear();
@@ -253,7 +252,6 @@ function clearLocalStorage() {
     historyEl.removeChild(historyEl.firstChild);
   }
 }
-
 
 clearHistoryBtn.click(clearHistoryAndStorage);
 
