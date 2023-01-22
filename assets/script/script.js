@@ -45,7 +45,7 @@ function geoCodeFunc(){
 function oneCallWeather(){
 
     console.log("oneCallWeather fired");
-
+    
     const exclude = 'minutely,hourly,alerts';
     const units = 'metric';
     const oneCallURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latVar}&lon=${lonVar}&exclude=${exclude}&units=${units}&appid=${apiKey}`;
@@ -181,7 +181,9 @@ function oneCallWeather(){
               }@2x.png`);
             temp5.innerText = "Temp: " + data.daily[4].temp.day + "°C";
             wind5.innerText = "Wind: " + data.daily[4].wind_speed;
-            humid5.innerText = "Humidity: " + data.daily[4].humidity + " g.m-3"
+            humid5.innerText = "Humidity: " + data.daily[4].humidity + " g.m-3";
+
+            populateHistory();
 
     });}
 
@@ -217,18 +219,25 @@ var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty arra
 
 function searchHistory() {  
   historyEl.innerHTML = "";
-  storageArray.push(placeNameGlobal);
-  storageArray.push(lonVar);
-  storageArray.push(latVar);
+  
+//   storageArray.push(placeNameGlobal);
+//   storageArray.push(lonVar);
+//   storageArray.push(latVar);
+  storageObject = {
+    placeNameGlobal,
+    lonVar,
+    latVar,
+  }
+  storageArray.push(storageObject);
   localStorage.setItem("value", JSON.stringify(storageArray));
 }
 
 // function to iterate and populate
 
 function populateHistory(){
-  historyList.innerHTML = "";
+  historyEl.innerHTML = "";
   for (let i = 0; i < storageArray.length; i++) {
-    const element = storageArray[i];
+    const element = JSON.stringify(storageArray[i]);
     // const liEl = document.createElement("li");
     // liEl.textContent = element;
     // historyList.appendChild(liEl);
@@ -236,8 +245,8 @@ function populateHistory(){
     // create button with name and latLong data
     let buttonListEl = document.createElement("button");
     buttonListEl.setAttribute("class", "list-button");
-    buttonListEl.textContent = placeNameGlobal;
-    buttonListEl.dataset.city = data[0].name;
+    buttonListEl.textContent = element;
+    // buttonListEl.dataset.city = data[0].name;
     buttonListEl.dataset.long = lonVar;
     buttonListEl.dataset.lat = latVar; 
     // add button to history UL
@@ -247,9 +256,11 @@ function populateHistory(){
   // event.preventDefault();
 };
 
+populateHistory();
+
 function clearLocalStorage() {
   localStorage.clear();
-  storageArray = [];
+  storageArray.empty();
   while (historyEl.hasChildNodes()) {
     historyEl.removeChild(historyEl.firstChild);
   }
