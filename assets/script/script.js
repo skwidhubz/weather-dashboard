@@ -218,6 +218,8 @@ var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty arra
 function searchHistory() {  
   historyEl.innerHTML = "";
   storageArray.push(placeNameGlobal);
+  storageArray.push(lonVar);
+  storageArray.push(latVar);
   localStorage.setItem("value", JSON.stringify(storageArray));
 }
 
