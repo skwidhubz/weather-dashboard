@@ -21,29 +21,31 @@ function geoCodeFunc(){
         console.log(data);
         console.log(data[0].lat);
         console.log(data[0].lon);
-        const cityLat = data[0].lat
-        const cityLon = data[0].lon
-        return latVar = cityLat, lonVar = cityLon
-
-        function oneCallWeather(){
-
-            const exclude = 'minutely,hourly,alerts';
-            const units = 'metric';
-            const oneCallURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latVar}&lon=${lonVar}&exclude=${exclude}&units=${units}&appid=${apiKey}`;
-            
-                fetch(oneCallURL)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("oneCall Func");
-                    console.log(data);
-            });}
-
-        
+        const cityLat = data[0].lat;
+        const cityLon = data[0].lon;
+        oneCallWeather();
+        return latVar = cityLat, lonVar = cityLon;
     });
 }
 
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 // city into query URL
+
+        
+function oneCallWeather(){
+
+    console.log("oneCallWeather fired");
+
+    const exclude = 'minutely,hourly,alerts';
+    const units = 'metric';
+    const oneCallURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latVar}&lon=${lonVar}&exclude=${exclude}&units=${units}&appid=${apiKey}`;
+    
+        fetch(oneCallURL)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("oneCall Func");
+            console.log(data);
+    });}
 
 
 
