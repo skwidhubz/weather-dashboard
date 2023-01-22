@@ -80,9 +80,8 @@ function oneCallWeather(){
 
             // five day forecast list cards
             // let dateBase = dayjs().format('DD/MM/YYYY');
-            let currentDate = dayjs.unix(data.current.dt).format('DD/MM/YYYY');
+            let currentDate = dayjs().format('DD+/MM/YYYY');
             
-
             const fiveCardEl1 = $('<div></div>').addClass("five-cards");
             fiveDayContainer.append(fiveCardEl1);
             const currentIcon1 = document.createElement("img")
@@ -95,7 +94,7 @@ function oneCallWeather(){
             fiveCardEl1.append(temp1);
             fiveCardEl1.append(wind1);
             fiveCardEl1.append(humid1);
-            date1.innerText = currentDate+1;
+            date1.innerText = currentDate++;
             currentIcon1.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[0].weather[0].icon
               }@2x.png`);
@@ -115,7 +114,7 @@ function oneCallWeather(){
             fiveCardEl2.append(temp2);
             fiveCardEl2.append(wind2);
             fiveCardEl2.append(humid2);
-            date2.innerText = currentDate+2;
+            date2.innerText = currentDate+1;
             currentIcon2.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[1].weather[0].icon
               }@2x.png`);
