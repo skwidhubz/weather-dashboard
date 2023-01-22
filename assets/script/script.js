@@ -80,7 +80,7 @@ function oneCallWeather(){
 
             // five day forecast list cards
             // let dateBase = dayjs().format('DD/MM/YYYY');
-            let currentDate = dayjs().format('DD+/MM/YYYY');
+            let currentDate = dayjs();
             
             const fiveCardEl1 = $('<div></div>').addClass("five-cards");
             fiveDayContainer.append(fiveCardEl1);
@@ -94,7 +94,7 @@ function oneCallWeather(){
             fiveCardEl1.append(temp1);
             fiveCardEl1.append(wind1);
             fiveCardEl1.append(humid1);
-            date1.innerText = currentDate++;
+            date1.innerText = currentDate.add(1, "days").format('DD/MM/YYYY');
             currentIcon1.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[0].weather[0].icon
               }@2x.png`);
@@ -114,7 +114,7 @@ function oneCallWeather(){
             fiveCardEl2.append(temp2);
             fiveCardEl2.append(wind2);
             fiveCardEl2.append(humid2);
-            date2.innerText = currentDate+1;
+            date2.innerText = currentDate.add(2, "days").format('DD/MM/YYYY');
             currentIcon2.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[1].weather[0].icon
               }@2x.png`);
@@ -134,7 +134,7 @@ function oneCallWeather(){
             fiveCardEl3.append(temp3);
             fiveCardEl3.append(wind3);
             fiveCardEl3.append(humid3);
-            date3.innerText = currentDate+3;
+            date3.innerText = currentDate.add(3, "days").format('DD/MM/YYYY');
             currentIcon3.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[2].weather[0].icon
               }@2x.png`);
@@ -154,7 +154,7 @@ function oneCallWeather(){
             fiveCardEl4.append(temp4);
             fiveCardEl4.append(wind4);
             fiveCardEl4.append(humid4);
-            date4.innerText = currentDate+4;
+            date4.innerText = currentDate.add(4, "days").format('DD/MM/YYYY');
             currentIcon4.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[3].weather[0].icon
               }@2x.png`);
@@ -174,7 +174,7 @@ function oneCallWeather(){
             fiveCardEl5.append(temp5);
             fiveCardEl5.append(wind5);
             fiveCardEl5.append(humid5);
-            date5.innerText = currentDate+5;
+            date5.innerText = currentDate.add(5, "days").format('DD/MM/YYYY');
             currentIcon5.setAttribute("src", `http://openweathermap.org/img/wn/${
                 data.daily[4].weather[0].icon
               }@2x.png`);
