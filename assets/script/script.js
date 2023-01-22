@@ -16,7 +16,7 @@ submitBtn.click(geoCodeFunc);
 
 function geoCodeFunc(){
     var cityText = $("#city-name").val();
-    var qURL = "http://api.openweathermap.org/geo/1.0/direct?q="+cityText+"&limit=5&appid="+apiKey
+    var qURL = "https://api.openweathermap.org/geo/1.0/direct?q="+cityText+"&limit=5&appid="+apiKey
     fetch(qURL)
     .then((response) => response.json())
     .then((data) => {
