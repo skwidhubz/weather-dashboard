@@ -39,10 +39,11 @@ function geoCodeFunc(){
     });
 }
 
+// recall func??? 
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 // city into query URL
 
-        
+// MAIN WEATHER FUNC
 function oneCallWeather(){
 
     console.log("oneCallWeather fired");
@@ -217,21 +218,21 @@ function printGlobalVar(){
 
 // page loaded populate function
 
-var storageArray = JSON.parse(localStorage.getItem("value")) || []; //empty array to store search query
+var storageArray = JSON.parse(localStorage.getItem('valueKey')) || []; //empty array to store search query
 
 function searchHistory() {  
   historyEl.innerHTML = "";
   
-//   storageArray.push(placeNameGlobal);
+  storageArray.push(placeNameGlobal);
 //   storageArray.push(lonVar);
 //   storageArray.push(latVar);
-  storageObject = {
-    placeNameGlobal,
-    lonVar,
-    latVar,
-  }
-  storageArray.push(storageObject);
-  localStorage.setItem("value", JSON.stringify(storageArray));
+//   storageObject = {
+//     placeNameGlobal,
+//     lonVar,
+//     latVar,
+//   }
+//   storageArray.push(storageObject);
+  localStorage.setItem('valueKey', JSON.stringify(storageArray));
 }
 
 // function to iterate and populate
@@ -243,7 +244,6 @@ function populateHistory(){
     // const liEl = document.createElement("li");
     // liEl.textContent = element;
     // historyList.appendChild(liEl);
-
     // create button with name and latLong data
     let buttonListEl = document.createElement("button");
     buttonListEl.setAttribute("class", "list-button");
