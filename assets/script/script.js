@@ -4,6 +4,7 @@ const weatherContainer = $("#current-weather-ul"); //UL list for weather
 const apiKey = "b5a40f59d7b1cf68e5036b045244a798"; //API key
 var textBox = document.getElementById("#city-name"); //city name text box
 const fiveDayContainer = $("#five-day-ul"); //UL for five day
+const fiveDayHeader = $("#five-day-header"); // five day h3 header
 var historyEl = $("#search-history-ul") // search history UL
 const clearHistoryBtn = $("#clear-search-btn"); // clear history button
 var placeNameGlobal = "";
@@ -81,9 +82,11 @@ function oneCallWeather(){
             // five day forecast list cards
             // let dateBase = dayjs().format('DD/MM/YYYY');
             let currentDate = dayjs();
-            
+            fiveDayHeader.attr("style", "display: flex");
             const fiveCardEl1 = $('<div></div>').addClass("five-cards");
             fiveDayContainer.append(fiveCardEl1);
+            
+
             const currentIcon1 = document.createElement("img")
             let date1 = document.createElement("li");
             let temp1 = document.createElement("li");

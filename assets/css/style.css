@@ -101,6 +101,10 @@ li {
     flex-direction: column;
 }
 
+#five-day-header{
+    display: none;
+}
+
 #five-day-ul{
     display: flex;
     flex-direction: row;
