@@ -8,7 +8,7 @@ API's used are openWeather API and dayJS.
 
 A link to the deployed application:
 
-
+https://skwidhubz.github.io/weather-dashboard/
 
 
 Coded by T.Parker.
