@@ -17,7 +17,7 @@ var submitBtn = $("#submit-btn");
 
 submitBtn.click(geoCodeFunc);
 
-function geoCodeFunc(){
+function geoCodeFunc(cityText){
     var cityText = $("#city-name").val();
     var qURL = "https://api.openweathermap.org/geo/1.0/direct?q="+cityText+"&limit=5&appid="+apiKey
     fetch(qURL)
@@ -32,9 +32,10 @@ function geoCodeFunc(){
         // oneCallWeather();
         latVar = cityLat;
         lonVar = cityLon;
-        buttonListEl.dataset.long = lonVar;
-        buttonListEl.dataset.lat = latVar; 
+        // buttonListEl.dataset.long = lonVar;
+        // buttonListEl.dataset.lat = latVar; 
         placeNameGlobal = data[0].name;
+        buttonListEl.dataset.nameData = placeNameGlobal;
         oneCallWeather(latVar, lonVar);
         const placeName = document.createElement("h3");
         weatherContainer.append(placeName);
@@ -48,7 +49,7 @@ function geoCodeFunc(){
 // city into query URL
 
 // MAIN WEATHER FUNC
-function oneCallWeather(latVar, lonVar){
+function oneCallWeather(){
 
     console.log("oneCallWeather fired");
     
@@ -61,9 +62,6 @@ function oneCallWeather(latVar, lonVar){
         .then((data) => {
             console.log("oneCall Func");
             console.log(data);
-
-            
-            
             // current weather container populate list
             const currentIcon = document.createElement("img")
             const dataDescription = document.createElement("li");
@@ -85,7 +83,6 @@ function oneCallWeather(latVar, lonVar){
             mainFeelsLike.innerText = "Feels like: " + data.current.feels_like + "°C";
             windSpeed.innerText = "Wind speed: " + data.current.wind_speed + " Knots";
             humidity.innerText = "Humidity: " + data.current.humidity + "%";
-
             // five day forecast list cards
             // let dateBase = dayjs().format('DD/MM/YYYY');
             let currentDate = dayjs();
@@ -345,7 +342,7 @@ function oneCallWeather(latVar, lonVar){
 var submitBtn = $("#submit-btn");
 
 // submitBtn.click(getCurrentWeather);
-submitBtn.click(printGlobalVar);
+
 submitBtn.click(clearDataFunc);
 
 // clear containers function
@@ -357,14 +354,6 @@ function clearDataFunc(){
         fiveDayContainer.empty();
 }
 
-
-function printGlobalVar(){
-    if (latVar == null && lonVar == null) {
-        console.log("latVar & lonVar is NULL")        
-    } else {
-        $("#test-container").text("latVar & lonVar has data")
-    }
-}
 
 // SEARCH HISTORY FUNCTION (HISTORY PAGE)((LOCAL STORAGE))
 
@@ -395,28 +384,17 @@ function populateHistory(){
     historyEl.innerHTML = "";
   for (let i = 0; i < storageArray.length; i++) {
     const element = JSON.stringify(storageArray[i]);
-    // const liEl = document.createElement("li");
-    // liEl.textContent = element;
-    // historyList.appendChild(liEl);
-    // create button with name and latLong data
     buttonListEl.setAttribute("class", "list-button");
     buttonListEl.textContent = element;
-    // buttonListEl.dataset.city = data[0].name;
-    // buttonListEl.dataset.long = lonVar;
-    // buttonListEl.dataset.lat = latVar; 
-    // add button to history UL
     historyEl.append(buttonListEl); 
+    document.querySelectorAll('.list-button').forEach(function(button){
+        button.addEventListener('click', event => {
+            nameSandwich = event.target.dataset.nameData;
+            geoCodeFunc(nameData)
+        })
+    });
   }
 };
-
-
-document.querySelectorAll('.list-button').forEach(function(button){
-    button.addEventListener('click', event => {
-        let latVar = event.target.dataset.lat;
-        let lonVar = event.target.dataset.lon;
-        oneCallWeather(latVar, lonVar);
-    })
-})
 
 
 populateHistory();
@@ -436,8 +414,6 @@ function clearHistoryAndStorage(){
     historyEl.innerHTML = "";
     localStorage.clear();
 }
-
-
 
 
 document.querySelectorAll('button').forEach(function (button){
