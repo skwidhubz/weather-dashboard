@@ -387,14 +387,15 @@ function populateHistory(){
     buttonListEl.setAttribute("class", "list-button");
     buttonListEl.textContent = element;
     historyEl.append(buttonListEl); 
-    document.querySelectorAll('.list-button').forEach(function(button){
-        button.addEventListener('click', event => {
-            nameSandwich = event.target.dataset.nameData;
-            geoCodeFunc(nameData)
-        })
-    });
   }
 };
+
+    document.querySelectorAll('.list-button').forEach(function(button){
+        button.addEventListener('click', event => {
+            cityText = event.target.dataset.nameData;
+            geoCodeFunc(cityText)
+        })
+    });
 
 
 populateHistory();
