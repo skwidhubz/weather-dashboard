@@ -11,7 +11,7 @@ A link to the deployed application:
 https://skwidhubz.github.io/weather-dashboard/
 
 
-![Screenshot_20230124_100929](https://user-images.githubusercontent.com/81959922/214276767-0fdcab02-8741-49c9-aa0a-10b49a05d84a.png)
+![Screenshot_20230125_092552](https://user-images.githubusercontent.com/81959922/214539449-8c98bd71-515f-4241-bfe3-c98d4f1449af.png)
 
 
 Coded by T.Parker.
