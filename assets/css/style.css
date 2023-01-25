@@ -1,21 +1,36 @@
 :root {
-    --blue: dodgerblue;
-    --white: rgb(255, 255, 255);
-    --darkblue: rgb(2, 43, 85); 
+    --nice-grey: #7b7b7bc7;
+    --white: #ffffff;
+    --soft-blue: #269dcccc;
+    --button-blue: #8fd1c1;
+    --background: #ffffff;
+    --main-text:  #000000af;
+
   }
 
+
 * {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    background-color: var(--white);
+    color: var(--main-text);
+    background-color: var(--background);
 }
 
+/* Global Selectors */
+
 button {
+    background-color: var(--button-blue);
     margin: 10px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: var(--white);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -24,22 +39,20 @@ h1, h2, h3, h4, h5, h6 {
 
 li {
     margin: 5px;
+    list-style: none;
 }
+
+/* Header Section */
 
 #header-bar {
     padding: 10px;
     display: flex;
     justify-content: flex-end;
-    background-color: var(--blue);
     color: var(--white);
+    background-color: var(--soft-blue);
 }
 
- /* CONTAINER CARD BORDER FOR LAYOUT DEBUG */
-.container-card {
-    /* border-style: solid;
-    border-color: black;
-    border-width: 1px; */
-}
+/* Main container classes */
 
 .main-container {
     display: flex;
@@ -47,20 +60,27 @@ li {
 }
 
 .left-side {
-    flex-grow: 0.5;
+    flex-grow: 0;
     display: flex;
     flex-direction: column;
 }
 
 .right-side {
-    flex-grow: 1.5;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
+/* Search Container  */
+
 #search-card{
     display: flex;
     flex-direction: column;
+}
+
+#search-card button{
+    color: var(--white);
+    background-color: var(--soft-blue);
 }
 
 #search-box{
@@ -74,6 +94,8 @@ li {
     font-size: larger;
 }
 
+/* Search History Container */
+
 #history-card{
     display: flex;
     flex-direction: column;
@@ -85,16 +107,24 @@ li {
     align-items: flex-start;
 }
 
-.list-button {
-    background-color: var(--white);
-    color: blue;
-    margin: 5px;
+#clear-search-btn{
+    color: var(--white);
+    background-color: var(--soft-blue);
 }
+
+/* Current Weather Container */
 
 #weather-card{
     display: flex;
     flex-direction: column;
 }
+
+#current-weather-ul img{
+    width: 150px;
+    height: 150px;
+}
+
+/* Five Day Forecast Section  */
 
 #five-day-card{
     display: flex;
@@ -103,6 +133,7 @@ li {
 
 #five-day-header{
     display: none;
+    margin-left: 42px;
 }
 
 #five-day-ul{
@@ -111,14 +142,20 @@ li {
     list-style: none;
 }
 
+#five-day-ul img{
+    width: 80px;
+    height: 80px;
+
+}
+
 .five-cards{
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border-style: none;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     margin: 10px;
+    padding: 5px;
+    font-size: medium;
     color: var(--white);
-    background-color: var(--darkblue);
-
+    background-color: var(--nice-grey)
 }
