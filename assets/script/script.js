@@ -15,10 +15,11 @@ var placeNameGlobal = "";
 
 var submitBtn = $("#submit-btn");
 
-submitBtn.click(geoCodeFunc);
+submitBtn.click (function (){
+  var cityText = $("#city-name").val();
+  geoCodeFunc(cityText)});
 
 function geoCodeFunc(cityText){
-    var cityText = $("#city-name").val();
     var qURL = "https://api.openweathermap.org/geo/1.0/direct?q="+cityText+"&limit=5&appid="+apiKey
     fetch(qURL)
     .then((response) => response.json())
@@ -29,6 +30,7 @@ function geoCodeFunc(cityText){
         latVar = cityLat;
         lonVar = cityLon;
         placeNameGlobal = data[0].name;
+        console.log(placeNameGlobal);
         buttonListEl.dataset.nameData = placeNameGlobal;
         oneCallWeather(latVar, lonVar);
         const placeName = document.createElement("h3");
@@ -37,10 +39,6 @@ function geoCodeFunc(cityText){
         searchHistory()
     });
 }
-
-// recall func??? 
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-// city into query URL
 
 // MAIN WEATHER FUNC
 function oneCallWeather(){
@@ -73,6 +71,13 @@ function oneCallWeather(){
             mainFeelsLike.innerText = "Feels like: " + data.current.feels_like + "°C";
             windSpeed.innerText = "Wind speed: " + data.current.wind_speed + " Knots";
             humidity.innerText = "Humidity: " + data.current.humidity + "%";
+
+              
+            // five day weather loop
+
+            
+
+
             // five day forecast list cards
             let currentDate = dayjs();
             fiveDayHeader.attr("style", "display: flex");
@@ -95,7 +100,7 @@ function oneCallWeather(){
               }@2x.png`);
             temp1.innerText = "Temp: " + data.daily[0].temp.day + "°C";
             wind1.innerText = "Wind: " + data.daily[0].wind_speed;
-            humid1.innerText = "Humidity: " + data.daily[0].humidity + "%";
+            humid1.innerText = "Humidity: " + data.daily[0].humidity + "%";  
 
             const fiveCardEl2 = $('<div></div>').addClass("five-cards");
             fiveDayContainer.append(fiveCardEl2);
@@ -205,8 +210,8 @@ function searchHistory() {
 function populateHistory(){
     historyEl.innerHTML = "";
   for (let i = 0; i < storageArray.length; i++) {
-    const element = JSON.stringify(storageArray[i]);
-    var buttonListEl = document.createElement("li"); // History list button
+    const element = storageArray[i];
+    var buttonListEl = document.createElement("button"); // History list button
     buttonListEl.setAttribute("class", "list-button");
     buttonListEl.textContent = element;
     historyEl.append(buttonListEl); 
@@ -230,9 +235,18 @@ function clearHistoryAndStorage(){
     localStorage.clear();
 }
 
-document.querySelectorAll('button').forEach(function (button){
-    button.addEventListener
+document.querySelectorAll('.list-button').forEach(function (button){
+    button.addEventListener("click", checkButton);
+
 })
 
+// buttonEl = document.querySelectorAll('.list-button')
+
+function checkButton(){
+  console.log(this.innerText);
+  var newPlaceName = this.innerText;
+  geoCodeFunc(newPlaceName);
+
+}
 
 
