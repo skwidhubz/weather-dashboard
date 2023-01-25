@@ -8,8 +8,7 @@ const fiveDayHeader = $("#five-day-header"); // five day h3 header
 var historyEl = document.getElementById("search-history-ul"); // search history UL
 var buttonListEl = document.createElement("li"); // history list button
 const clearHistoryBtn = $("#clear-search-btn"); // clear history button
-var placeNameGlobal = "";
-
+var placeNameGlobal = ""; //empty string variable for place name from search
 
 // Geocoding conversion API
 
@@ -26,11 +25,9 @@ function geoCodeFunc(cityText){
     .then((data) => {
         const cityLat = data[0].lat;
         const cityLon = data[0].lon;
-        // oneCallWeather();
         latVar = cityLat;
         lonVar = cityLon;
         placeNameGlobal = data[0].name;
-        console.log(placeNameGlobal);
         buttonListEl.dataset.nameData = placeNameGlobal;
         oneCallWeather(latVar, lonVar);
         const placeName = document.createElement("h3");
@@ -71,120 +68,37 @@ function oneCallWeather(){
             mainFeelsLike.innerText = "Feels like: " + data.current.feels_like + "°C";
             windSpeed.innerText = "Wind speed: " + data.current.wind_speed + " Knots";
             humidity.innerText = "Humidity: " + data.current.humidity + "%";
-
-              
+ 
             // five day weather loop
-
-            
-
-
-            // five day forecast list cards
             let currentDate = dayjs();
             fiveDayHeader.attr("style", "display: flex");
-            const fiveCardEl1 = $('<div></div>').addClass("five-cards");
-            fiveDayContainer.append(fiveCardEl1);
-          
-            const currentIcon1 = document.createElement("img")
-            let date1 = document.createElement("li");
-            let temp1 = document.createElement("li");
-            let wind1 = document.createElement("li");
-            let humid1 = document.createElement("li");
-            fiveCardEl1.append(date1);
-            fiveCardEl1.append(currentIcon1)
-            fiveCardEl1.append(temp1);
-            fiveCardEl1.append(wind1);
-            fiveCardEl1.append(humid1);
-            date1.innerText = currentDate.add(1, "days").format('dddd');
-            currentIcon1.setAttribute("src", `http://openweathermap.org/img/wn/${
-                data.daily[0].weather[0].icon
-              }@2x.png`);
-            temp1.innerText = "Temp: " + data.daily[0].temp.day + "°C";
-            wind1.innerText = "Wind: " + data.daily[0].wind_speed;
-            humid1.innerText = "Humidity: " + data.daily[0].humidity + "%";  
 
-            const fiveCardEl2 = $('<div></div>').addClass("five-cards");
-            fiveDayContainer.append(fiveCardEl2);
-            const currentIcon2 = document.createElement("img")
-            let date2 = document.createElement("li");
-            let temp2 = document.createElement("li");
-            let wind2 = document.createElement("li");
-            let humid2 = document.createElement("li");
-            fiveCardEl2.append(date2);
-            fiveCardEl2.append(currentIcon2)
-            fiveCardEl2.append(temp2);
-            fiveCardEl2.append(wind2);
-            fiveCardEl2.append(humid2);
-            date2.innerText = currentDate.add(2, "days").format('dddd');
-            currentIcon2.setAttribute("src", `http://openweathermap.org/img/wn/${
-                data.daily[1].weather[0].icon
-              }@2x.png`);
-            temp2.innerText = "Temp: " + data.daily[1].temp.day + "°C";
-            wind2.innerText = "Wind: " + data.daily[1].wind_speed;
-            humid2.innerText = "Humidity: " + data.daily[1].humidity + "%";
+            for (let i = 1; i < 6; i++) { // starting at 1 to correct 5day start date
 
-            const fiveCardEl3 = $('<div></div>').addClass("five-cards");
-            fiveDayContainer.append(fiveCardEl3);
-            const currentIcon3 = document.createElement("img")
-            let date3 = document.createElement("li");
-            let temp3 = document.createElement("li");
-            let wind3 = document.createElement("li");
-            let humid3 = document.createElement("li");
-            fiveCardEl3.append(date3);
-            fiveCardEl3.append(currentIcon3)
-            fiveCardEl3.append(temp3);
-            fiveCardEl3.append(wind3);
-            fiveCardEl3.append(humid3);
-            date3.innerText = currentDate.add(3, "days").format('dddd');
-            currentIcon3.setAttribute("src", `http://openweathermap.org/img/wn/${
-                data.daily[2].weather[0].icon
-              }@2x.png`);
-            temp3.innerText = "Temp: " + data.daily[2].temp.day + "°C";
-            wind3.innerText = "Wind: " + data.daily[2].wind_speed;
-            humid3.innerText = "Humidity: " + data.daily[2].humidity + "%";
+              const fiveCardEl = $('<div></div>').addClass("five-cards");
+              fiveDayContainer.append(fiveCardEl);
 
-            const fiveCardEl4 = $('<div></div>').addClass("five-cards");
-            fiveDayContainer.append(fiveCardEl4);
-            const currentIcon4 = document.createElement("img")
-            let date4 = document.createElement("li");
-            let temp4 = document.createElement("li");
-            let wind4 = document.createElement("li");
-            let humid4 = document.createElement("li");
-            fiveCardEl4.append(date4);
-            fiveCardEl4.append(currentIcon4)
-            fiveCardEl4.append(temp4);
-            fiveCardEl4.append(wind4);
-            fiveCardEl4.append(humid4);
-            date4.innerText = currentDate.add(4, "days").format('dddd');
-            currentIcon4.setAttribute("src", `http://openweathermap.org/img/wn/${
-                data.daily[3].weather[0].icon
-              }@2x.png`);
-            temp4.innerText = "Temp: " + data.daily[3].temp.day + "°C";
-            wind4.innerText = "Wind: " + data.daily[3].wind_speed;
-            humid4.innerText = "Humidity: " + data.daily[3].humidity + "%";
-
-            const fiveCardEl5 = $('<div></div>').addClass("five-cards");
-            fiveDayContainer.append(fiveCardEl5);
-            const currentIcon5 = document.createElement("img")
-            let date5 = document.createElement("li");
-            let temp5 = document.createElement("li");
-            let wind5 = document.createElement("li");
-            let humid5 = document.createElement("li");
-            fiveCardEl5.append(date5);
-            fiveCardEl5.append(currentIcon5)
-            fiveCardEl5.append(temp5);
-            fiveCardEl5.append(wind5);
-            fiveCardEl5.append(humid5);
-            date5.innerText = currentDate.add(5, "days").format('dddd');
-            currentIcon5.setAttribute("src", `http://openweathermap.org/img/wn/${
-                data.daily[4].weather[0].icon
-              }@2x.png`);
-            temp5.innerText = "Temp: " + data.daily[4].temp.day + "°C";
-            wind5.innerText = "Wind: " + data.daily[4].wind_speed;
-            humid5.innerText = "Humidity: " + data.daily[4].humidity + "%";
+              const currentIcon = document.createElement("img")
+              let date = document.createElement("li");
+              let temp = document.createElement("li");
+              let wind = document.createElement("li");
+              let humid = document.createElement("li");
+              fiveCardEl.append(date);
+              fiveCardEl.append(currentIcon)
+              fiveCardEl.append(temp);
+              fiveCardEl.append(wind);
+              fiveCardEl.append(humid);
+              date.innerText = currentDate.add(i, "days").format('dddd');
+              currentIcon.setAttribute("src", `http://openweathermap.org/img/wn/${
+                  data.daily[i].weather[0].icon
+                }@2x.png`);
+              temp.innerText = "Temp: " + data.daily[i].temp.day + "°C";
+              wind.innerText = "Wind: " + data.daily[i].wind_speed;
+              humid.innerText = "Humidity: " + data.daily[i].humidity + "%"; 
+            }
 
             populateHistory();
     });}
-
 
 var submitBtn = $("#submit-btn");
 
@@ -237,13 +151,9 @@ function clearHistoryAndStorage(){
 
 document.querySelectorAll('.list-button').forEach(function (button){
     button.addEventListener("click", checkButton);
-
 })
 
-// buttonEl = document.querySelectorAll('.list-button')
-
 function checkButton(){
-  console.log(this.innerText);
   var newPlaceName = this.innerText;
   geoCodeFunc(newPlaceName);
 
